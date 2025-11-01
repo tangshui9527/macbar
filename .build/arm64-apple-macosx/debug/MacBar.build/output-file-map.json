@@ -1,0 +1,40 @@
+{
+  "": {
+    "swift-dependencies": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/master.swiftdeps"
+  },
+  "/Users/tangshui/Desktop/macbar/Sources/MacBar/MacBarApp.swift": {
+    "dependencies": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/MacBarApp.d",
+    "object": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/MacBarApp.swift.o",
+    "swiftmodule": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/MacBarApp~partial.swiftmodule",
+    "swift-dependencies": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/MacBarApp.swiftdeps",
+    "diagnostics": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/MacBarApp.dia"
+  },
+  "/Users/tangshui/Desktop/macbar/Sources/MacBar/OverlayView.swift": {
+    "dependencies": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/OverlayView.d",
+    "object": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/OverlayView.swift.o",
+    "swiftmodule": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/OverlayView~partial.swiftmodule",
+    "swift-dependencies": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/OverlayView.swiftdeps",
+    "diagnostics": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/OverlayView.dia"
+  },
+  "/Users/tangshui/Desktop/macbar/Sources/MacBar/OverlayWindowController.swift": {
+    "dependencies": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/OverlayWindowController.d",
+    "object": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/OverlayWindowController.swift.o",
+    "swiftmodule": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/OverlayWindowController~partial.swiftmodule",
+    "swift-dependencies": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/OverlayWindowController.swiftdeps",
+    "diagnostics": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/OverlayWindowController.dia"
+  },
+  "/Users/tangshui/Desktop/macbar/Sources/MacBar/SettingsManager.swift": {
+    "dependencies": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/SettingsManager.d",
+    "object": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/SettingsManager.swift.o",
+    "swiftmodule": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/SettingsManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/SettingsManager.swiftdeps",
+    "diagnostics": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/SettingsManager.dia"
+  },
+  "/Users/tangshui/Desktop/macbar/Sources/MacBar/SettingsView.swift": {
+    "dependencies": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/SettingsView.d",
+    "object": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/SettingsView.swift.o",
+    "swiftmodule": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/SettingsView~partial.swiftmodule",
+    "swift-dependencies": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/SettingsView.swiftdeps",
+    "diagnostics": "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/SettingsView.dia"
+  }
+}

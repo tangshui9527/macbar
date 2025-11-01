@@ -1,0 +1,347 @@
+{
+  "builtTestProducts" : [
+
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.MacBar-arm64-apple-macosx15.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/sources",
+      "importPath" : "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/Sources/MacBar/MacBarApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/Sources/MacBar/OverlayView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/Sources/MacBar/OverlayWindowController.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/Sources/MacBar/SettingsManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/Sources/MacBar/SettingsView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/sources"
+        }
+      ],
+      "isLibrary" : false,
+      "moduleName" : "MacBar",
+      "moduleOutputPath" : "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/Modules/MacBar.swiftmodule",
+      "objects" : [
+        "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/MacBarApp.swift.o",
+        "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/OverlayView.swift.o",
+        "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/OverlayWindowController.swift.o",
+        "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/SettingsManager.swift.o",
+        "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/SettingsView.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-Xfrontend",
+        "-entry-point-function-name",
+        "-Xfrontend",
+        "MacBar_main",
+        "-swift-version",
+        "5",
+        "-Xfrontend",
+        "-warn-long-function-bodies=100",
+        "-Xfrontend",
+        "-warn-long-expression-type-checking=100",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "macbar"
+      ],
+      "outputFileMapPath" : "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/MacBarApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/OverlayView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/OverlayWindowController.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/SettingsManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/SettingsView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/Modules/MacBar.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/tangshui/Desktop/macbar/Sources/MacBar/MacBarApp.swift",
+        "/Users/tangshui/Desktop/macbar/Sources/MacBar/OverlayView.swift",
+        "/Users/tangshui/Desktop/macbar/Sources/MacBar/OverlayWindowController.swift",
+        "/Users/tangshui/Desktop/macbar/Sources/MacBar/SettingsManager.swift",
+        "/Users/tangshui/Desktop/macbar/Sources/MacBar/SettingsView.swift"
+      ],
+      "tempsPath" : "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "MacBar" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "MacBar",
+      "-package-name",
+      "macbar",
+      "-c",
+      "/Users/tangshui/Desktop/macbar/Sources/MacBar/MacBarApp.swift",
+      "/Users/tangshui/Desktop/macbar/Sources/MacBar/OverlayView.swift",
+      "/Users/tangshui/Desktop/macbar/Sources/MacBar/OverlayWindowController.swift",
+      "/Users/tangshui/Desktop/macbar/Sources/MacBar/SettingsManager.swift",
+      "/Users/tangshui/Desktop/macbar/Sources/MacBar/SettingsView.swift",
+      "-I",
+      "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-Xfrontend",
+      "-entry-point-function-name",
+      "-Xfrontend",
+      "MacBar_main",
+      "-swift-version",
+      "5",
+      "-Xfrontend",
+      "-warn-long-function-bodies=100",
+      "-Xfrontend",
+      "-warn-long-expression-type-checking=100",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "macbar",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "MacBar" : [
+
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+
+  },
+  "traitConfiguration" : {
+    "default" : {
+
+    }
+  },
+  "writeCommands" : {
+    "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar-entitlement.plist" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<entitlement-plist>"
+        },
+        {
+          "kind" : "virtual",
+          "name" : "<com.apple.security.get-task-allow>"
+        }
+      ],
+      "outputFilePath" : "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar-entitlement.plist"
+    },
+    "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/Sources/MacBar/MacBarApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/Sources/MacBar/OverlayView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/Sources/MacBar/OverlayWindowController.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/Sources/MacBar/SettingsManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/Sources/MacBar/SettingsView.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/sources"
+    },
+    "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/MacBarApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/OverlayView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/OverlayWindowController.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/SettingsManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.build/SettingsView.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/MacBar.product/Objects.LinkFileList"
+    },
+    "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/tangshui/Desktop/macbar/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+    }
+  }
+}

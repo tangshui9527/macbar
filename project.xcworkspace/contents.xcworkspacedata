@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>BuildSystemType</key>
+    <string>Modern</string>
+    <key>BuildSystemBuiltinTargets</key>
+    <dict>
+        <key>MacBar</key>
+        <dict>
+            <key>isa</key>
+            <string>NativeApplication</string>
+            <key>productType</key>
+            <string>com.apple.product-type.application</string>
+            <key>productName</key>
+            <string>MacBar</string>
+            <key>buildSettings</key>
+            <dict>
+                <key>PRODUCT_NAME</key>
+                <string>$(TARGET_NAME)</string>
+                <key>PRODUCT_BUNDLE_IDENTIFIER</key>
+                <string>com.yourname.MacBar</string>
+                <key>MACOSX_DEPLOYMENT_TARGET</key>
+                <string>13.0</string>
+                <key>SWIFT_VERSION</key>
+                <string>5.0</string>
+            </dict>
+            <key>sourceFiles</key>
+            <array>
+                <string>Sources/MacBar/MacBarApp.swift</string>
+                <string>Sources/MacBar/SettingsView.swift</string>
+                <string>Sources/MacBar/SettingsManager.swift</string>
+                <string>Sources/MacBar/OverlayView.swift</string>
+                <string>Sources/MacBar/OverlayWindowController.swift</string>
+            </array>
+        </dict>
+    </dict>
+</dict>
+</plist>
