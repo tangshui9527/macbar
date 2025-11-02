@@ -17,7 +17,6 @@ final class SettingsManager: ObservableObject {
     private let positionXKey = "WindowPositionX"
     private let positionYKey = "WindowPositionY"
     private let widthKey = "WindowWidth"
-    private let heightKey = "WindowHeight"
     
     private init() {
         // 注册默认值，避免首次运行从UserDefaults读取到0而覆盖默认设置
@@ -26,7 +25,6 @@ final class SettingsManager: ObservableObject {
             positionXKey: 100,
             positionYKey: 100,
             widthKey: 300,
-            heightKey: 70,
             colorKey + "R": 0.0,
             colorKey + "G": 0.0,
             colorKey + "B": 0.0
@@ -45,7 +43,6 @@ final class SettingsManager: ObservableObject {
         userDefaults.set(windowPositionX, forKey: positionXKey)
         userDefaults.set(windowPositionY, forKey: positionYKey)
         userDefaults.set(windowWidth, forKey: widthKey)
-        userDefaults.set(windowHeight, forKey: heightKey)
     }
     
     func loadSettings() {
@@ -71,10 +68,6 @@ final class SettingsManager: ObservableObject {
         if userDefaults.object(forKey: widthKey) != nil {
             let w = userDefaults.double(forKey: widthKey)
             windowWidth = max(w, 200) // 保证最小宽度
-        }
-        if userDefaults.object(forKey: heightKey) != nil {
-            let h = userDefaults.double(forKey: heightKey)
-            windowHeight = max(h, 50) // 保证最小高度
         }
     }
 }

@@ -39,8 +39,8 @@ class OverlayWindow: NSWindow, NSWindowDelegate {
         // 关闭系统背景拖动，避免与自定义缩放冲突
         self.isMovableByWindowBackground = false
         // 无标题栏窗口，避免标题栏高度影响；设置最小内容尺寸与自定义缩放一致
-        self.contentMinSize = NSSize(width: 100, height: 30)
-        self.minSize = NSSize(width: 100, height: 30)
+        self.contentMinSize = NSSize(width: 100, height: 70)
+        self.minSize = NSSize(width: 100, height: 70)
         self.standardWindowButton(.closeButton)?.isHidden = true
         self.standardWindowButton(.miniaturizeButton)?.isHidden = true
         self.standardWindowButton(.zoomButton)?.isHidden = true
@@ -49,7 +49,7 @@ class OverlayWindow: NSWindow, NSWindowDelegate {
     
     // 定义边缘区域类型
     enum ResizeEdge {
-        case none, top, bottom, left, right, topLeft, topRight, bottomLeft, bottomRight
+        case none, left, right
     }
     
     // 鼠标移动时更新光标样式
@@ -63,24 +63,14 @@ class OverlayWindow: NSWindow, NSWindowDelegate {
         NSCursor.arrow.set()
     }
     
-    // 支持边缘调节：顶部、底部、左侧、右侧、四个角
+    // 支持边缘调节：左侧、右侧
     func resizeEdgeForPoint(_ point: NSPoint) -> ResizeEdge {
         let edgeSize: CGFloat = 10.0 // 边缘敏感区域大小
         let size = frame.size
         let isLeft = point.x < edgeSize
         let isRight = point.x > size.width - edgeSize
-        let isBottom = point.y < edgeSize
-        let isTop = point.y > size.height - edgeSize
 
-        // 判断四个角
-        if isTop && isLeft { return .topLeft }
-        if isTop && isRight { return .topRight }
-        if isBottom && isLeft { return .bottomLeft }
-        if isBottom && isRight { return .bottomRight }
-
-        // 判断四条边
-        if isTop { return .top }
-        if isBottom { return .bottom }
+        // 判断两条边
         if isLeft { return .left }
         if isRight { return .right }
 
@@ -90,13 +80,8 @@ class OverlayWindow: NSWindow, NSWindowDelegate {
     // 根据边缘区域设置对应的光标样式
     func updateCursorForEdge(_ edge: ResizeEdge) {
         switch edge {
-        case .top, .bottom:
-            NSCursor.resizeUpDown.set()
         case .left, .right:
             NSCursor.resizeLeftRight.set()
-        case .topLeft, .bottomRight, .topRight, .bottomLeft:
-            // 角落区域使用对角线缩放光标，如果没有专用光标则使用标准缩放光标
-            NSCursor.resizeLeftRight.set() // 或者使用 resizeUpDown
         default:
             NSCursor.arrow.set()
         }
@@ -123,7 +108,7 @@ class OverlayWindow: NSWindow, NSWindowDelegate {
     // 执行窗口缩放（使用窗口坐标系）
     func resizeWindow(from edge: ResizeEdge) {
         let startFrame = frame
-        let minSize = NSSize(width: 100, height: 30)
+        let minSize = NSSize(width: 100, height: 70)
         var tracking = true
 
         while tracking {
@@ -136,42 +121,12 @@ class OverlayWindow: NSWindow, NSWindowDelegate {
                     var newFrame = startFrame
 
                     switch edge {
-                    case .top:
-                        newFrame.size.height = max(p.y, minSize.height)
-                    case .bottom:
-                        let newHeight = max(startFrame.size.height - p.y, minSize.height)
-                        newFrame.origin.y = startFrame.maxY - newHeight
-                        newFrame.size.height = newHeight
                     case .left:
                         let newWidth = max(startFrame.size.width - p.x, minSize.width)
                         newFrame.origin.x = startFrame.maxX - newWidth
                         newFrame.size.width = newWidth
                     case .right:
                         newFrame.size.width = max(p.x, minSize.width)
-                    case .topLeft:
-                        let newWidth = max(startFrame.size.width - p.x, minSize.width)
-                        let newHeight = max(p.y, minSize.height)
-                        newFrame.origin.x = startFrame.maxX - newWidth
-                        newFrame.size.width = newWidth
-                        newFrame.size.height = newHeight
-                    case .topRight:
-                        let newWidth = max(p.x, minSize.width)
-                        let newHeight = max(p.y, minSize.height)
-                        newFrame.size.width = newWidth
-                        newFrame.size.height = newHeight
-                    case .bottomLeft:
-                        let newWidth = max(startFrame.size.width - p.x, minSize.width)
-                        let newHeight = max(startFrame.size.height - p.y, minSize.height)
-                        newFrame.origin.x = startFrame.maxX - newWidth
-                        newFrame.origin.y = startFrame.maxY - newHeight
-                        newFrame.size.width = newWidth
-                        newFrame.size.height = newHeight
-                    case .bottomRight:
-                        let newWidth = max(p.x, minSize.width)
-                        let newHeight = max(startFrame.size.height - p.y, minSize.height)
-                        newFrame.origin.y = startFrame.maxY - newHeight
-                        newFrame.size.width = newWidth
-                        newFrame.size.height = newHeight
                     default:
                         break
                     }
@@ -183,7 +138,6 @@ class OverlayWindow: NSWindow, NSWindowDelegate {
                         SettingsManager.shared.windowPositionX = Double(newFrame.origin.x)
                         SettingsManager.shared.windowPositionY = Double(newFrame.origin.y)
                         SettingsManager.shared.windowWidth = Double(newFrame.size.width)
-                        SettingsManager.shared.windowHeight = Double(newFrame.size.height)
                         SettingsManager.shared.saveSettings()
                     }
                 default:
@@ -219,7 +173,6 @@ class OverlayWindow: NSWindow, NSWindowDelegate {
             DispatchQueue.main.async {
                 // 无标题栏下，frame即内容尺寸
                 SettingsManager.shared.windowWidth = Double(self.frame.width)
-                SettingsManager.shared.windowHeight = Double(self.frame.height)
                 SettingsManager.shared.saveSettings()
             }
         }
@@ -250,14 +203,6 @@ class OverlayWindowController: NSWindowController {
             SettingsManager.shared.transparency = 1.0
             SettingsManager.shared.saveSettings()
             UserDefaults.standard.set(true, forKey: opacityDefaultAppliedKey)
-        }
-
-        // 应用户需求：一次性把高度设置为70（若未应用过）
-        let height70AppliedKey = "UserRequestedHeight70Applied"
-        if !UserDefaults.standard.bool(forKey: height70AppliedKey) {
-            SettingsManager.shared.windowHeight = 70
-            SettingsManager.shared.saveSettings()
-            UserDefaults.standard.set(true, forKey: height70AppliedKey)
         }
 
         let overlayView = OverlayView()
