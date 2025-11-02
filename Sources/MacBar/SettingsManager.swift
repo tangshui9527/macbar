@@ -9,7 +9,7 @@ final class SettingsManager: ObservableObject {
     @Published var windowPositionX: Double = 100
     @Published var windowPositionY: Double = 100
     @Published var windowWidth: Double = 300
-    @Published var windowHeight: Double = 90
+    @Published var windowHeight: Double = 70
     
     private let userDefaults = UserDefaults.standard
     private let colorKey = "OverlayColor"
@@ -26,7 +26,7 @@ final class SettingsManager: ObservableObject {
             positionXKey: 100,
             positionYKey: 100,
             widthKey: 300,
-            heightKey: 90,
+            heightKey: 70,
             colorKey + "R": 0.0,
             colorKey + "G": 0.0,
             colorKey + "B": 0.0

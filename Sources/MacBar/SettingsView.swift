@@ -43,6 +43,50 @@ struct SettingsView: View {
             .background(Color(NSColor.controlBackgroundColor))
             .cornerRadius(10)
             
+            // 新增窗口尺寸调节区域
+            VStack(spacing: 15) {
+                HStack {
+                    Text("窗口尺寸")
+                        .font(.headline)
+                    Spacer()
+                }
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack {
+                        Text("宽度")
+                        Spacer()
+                        Text("\(Int(settings.windowWidth)) px")
+                            .foregroundColor(.secondary)
+                    }
+                    Slider(value: $settings.windowWidth, in: 200...2000, step: 10) { changed in
+                        if !changed {
+                            settings.saveSettings()
+                            // 更新窗口尺寸
+                            OverlayWindowController.shared?.updateWindowSize()
+                        }
+                    }
+                }
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack {
+                        Text("高度")
+                        Spacer()
+                        Text("\(Int(settings.windowHeight)) px")
+                            .foregroundColor(.secondary)
+                    }
+                    Slider(value: $settings.windowHeight, in: 50...90, step: 5) { changed in
+                        if !changed {
+                            settings.saveSettings()
+                            // 更新窗口尺寸
+                            OverlayWindowController.shared?.updateWindowSize()
+                        }
+                    }
+                }
+            }
+            .padding()
+            .background(Color(NSColor.controlBackgroundColor))
+            .cornerRadius(10)
+            
             Spacer()
         }
         .padding()

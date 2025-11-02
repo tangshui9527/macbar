@@ -8,6 +8,7 @@ struct OverlayView: View {
     @State private var isDragging: Bool = false
     
     var body: some View {
+        GeometryReader { geo in
         ZStack {
             // 主要遮罩层
             Rectangle()
@@ -33,7 +34,10 @@ struct OverlayView: View {
                 // 底部控制区域（移除双击打开设置提示）
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onAppear {
+            print("[MacBar] Overlay SwiftUI content size: \(geo.size)")
+        }
+        }
         .onAppear {
             overlayColor = SettingsManager.shared.overlayColor
             transparency = SettingsManager.shared.transparency
@@ -53,6 +57,11 @@ struct OverlayView: View {
         }
         // 右键菜单：提供退出选项
         .contextMenu {
+            Button("设置") {
+                // 显示设置窗口
+                NSApp.sendAction(Selector(("showPreferences")), to: nil, from: nil)
+            }
+            
             Button("退出") {
                 NSApplication.shared.terminate(nil)
             }
