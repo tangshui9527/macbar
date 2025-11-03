@@ -1,0 +1,23 @@
+# Build results
+.build/
+.DS_Store
+*.ipa
+*.dSYM.zip
+*.dSYM/
+
+# Xcode
+xcuserdata/
+*.xcworkspace/xcuserdata
+*.xcworkspace/xcshareddata
+*.xcodeproj/xcuserdata
+*.xcodeproj/project.xcworkspace/xcshareddata
+*.xcodeproj/project.xcworkspace/xcuserdata
+*.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+
+# Swift Package Manager
+.swiftpm/configuration/xcconfig/
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+.swiftpm/xcode/package.xcworkspace/xcuserdata/
+
+# SwiftPM build cache
+.xcframeworks/
