@@ -6,6 +6,14 @@ final class FixedSizeHostingView<Content: View>: NSHostingView<Content> {
     override var intrinsicContentSize: NSSize {
         return fixedSize
     }
+    
+    override func setFrameSize(_ newSize: NSSize) {
+        if fixedSize != newSize {
+            fixedSize = newSize
+            invalidateIntrinsicContentSize()
+        }
+        super.setFrameSize(newSize)
+    }
 }
 
 class OverlayWindow: NSWindow, NSWindowDelegate {
@@ -49,7 +57,9 @@ class OverlayWindow: NSWindow, NSWindowDelegate {
     
     // 定义边缘区域类型
     enum ResizeEdge {
-        case none, left, right
+        case none
+        case left, right, top, bottom
+        case topLeft, topRight, bottomLeft, bottomRight
     }
     
     // 鼠标移动时更新光标样式
@@ -63,16 +73,26 @@ class OverlayWindow: NSWindow, NSWindowDelegate {
         NSCursor.arrow.set()
     }
     
-    // 支持边缘调节：左侧、右侧
+    // 支持边缘调节：四个边及四个角
     func resizeEdgeForPoint(_ point: NSPoint) -> ResizeEdge {
         let edgeSize: CGFloat = 10.0 // 边缘敏感区域大小
         let size = frame.size
         let isLeft = point.x < edgeSize
         let isRight = point.x > size.width - edgeSize
+        let isBottom = point.y < edgeSize
+        let isTop = point.y > size.height - edgeSize
 
-        // 判断两条边
+        // 先判断四个角
+        if isLeft && isBottom { return .bottomLeft }
+        if isLeft && isTop { return .topLeft }
+        if isRight && isBottom { return .bottomRight }
+        if isRight && isTop { return .topRight }
+
+        // 再判断四条边
         if isLeft { return .left }
         if isRight { return .right }
+        if isBottom { return .bottom }
+        if isTop { return .top }
 
         return .none
     }
@@ -82,6 +102,10 @@ class OverlayWindow: NSWindow, NSWindowDelegate {
         switch edge {
         case .left, .right:
             NSCursor.resizeLeftRight.set()
+        case .top, .bottom:
+            NSCursor.resizeUpDown.set()
+        case .topLeft, .bottomRight, .topRight, .bottomLeft:
+            NSCursor.arrow.set()
         default:
             NSCursor.arrow.set()
         }
@@ -92,7 +116,7 @@ class OverlayWindow: NSWindow, NSWindowDelegate {
         let edge = resizeEdgeForPoint(event.locationInWindow)
         if edge != .none {
             // 边缘区域：执行窗口缩放
-            resizeWindow(from: edge)
+            resizeWindow(from: edge, initialEvent: event)
         } else {
             // 非边缘区域：执行拖动并保存位置
             self.performDrag(with: event)
@@ -106,9 +130,10 @@ class OverlayWindow: NSWindow, NSWindowDelegate {
     }
     
     // 执行窗口缩放（使用窗口坐标系）
-    func resizeWindow(from edge: ResizeEdge) {
+    func resizeWindow(from edge: ResizeEdge, initialEvent: NSEvent) {
         let startFrame = frame
         let minSize = NSSize(width: 100, height: 70)
+        let initialLocation = initialEvent.locationInWindow
         var tracking = true
 
         while tracking {
@@ -117,27 +142,48 @@ class OverlayWindow: NSWindow, NSWindowDelegate {
                 case .leftMouseUp:
                     tracking = false
                 case .leftMouseDragged:
-                    let p = mouseEvent.locationInWindow // 相对窗口坐标
+                    let currentLocation = mouseEvent.locationInWindow
+                    let deltaX = currentLocation.x - initialLocation.x
+                    let deltaY = currentLocation.y - initialLocation.y
                     var newFrame = startFrame
 
                     switch edge {
-                    case .left:
-                        let newWidth = max(startFrame.size.width - p.x, minSize.width)
+                    case .left, .topLeft, .bottomLeft:
+                        let newWidth = max(startFrame.size.width - deltaX, minSize.width)
                         newFrame.origin.x = startFrame.maxX - newWidth
                         newFrame.size.width = newWidth
-                    case .right:
-                        newFrame.size.width = max(p.x, minSize.width)
+                    case .right, .topRight, .bottomRight:
+                        let newWidth = max(startFrame.size.width + deltaX, minSize.width)
+                        newFrame.size.width = newWidth
+                    default:
+                        break
+                    }
+
+                    switch edge {
+                    case .bottom, .bottomLeft, .bottomRight:
+                        let newHeight = max(startFrame.size.height - deltaY, minSize.height)
+                        newFrame.origin.y = startFrame.maxY - newHeight
+                        newFrame.size.height = newHeight
+                    case .top, .topLeft, .topRight:
+                        let newHeight = max(startFrame.size.height + deltaY, minSize.height)
+                        newFrame.size.height = newHeight
                     default:
                         break
                     }
 
                     setFrame(newFrame, display: true)
+                    if let hostingView = contentView as? FixedSizeHostingView<OverlayView> {
+                        let size = NSSize(width: newFrame.size.width, height: newFrame.size.height)
+                        hostingView.fixedSize = size
+                        hostingView.setFrameSize(size)
+                    }
 
                     // 保存新的窗口位置和尺寸
                     DispatchQueue.main.async {
                         SettingsManager.shared.windowPositionX = Double(newFrame.origin.x)
                         SettingsManager.shared.windowPositionY = Double(newFrame.origin.y)
                         SettingsManager.shared.windowWidth = Double(newFrame.size.width)
+                        SettingsManager.shared.windowHeight = Double(newFrame.size.height)
                         SettingsManager.shared.saveSettings()
                     }
                 default:
@@ -168,11 +214,18 @@ class OverlayWindow: NSWindow, NSWindowDelegate {
     }
     
     func windowDidResize(_ notification: Notification) {
-        // Update stored size
+        let size = NSSize(width: frame.width, height: frame.height)
+        if let hostingView = contentView as? FixedSizeHostingView<OverlayView> {
+            hostingView.fixedSize = size
+            hostingView.setFrameSize(size)
+        }
         if savingEnabled {
+            let width = Double(size.width)
+            let height = Double(size.height)
             DispatchQueue.main.async {
                 // 无标题栏下，frame即内容尺寸
-                SettingsManager.shared.windowWidth = Double(self.frame.width)
+                SettingsManager.shared.windowWidth = width
+                SettingsManager.shared.windowHeight = height
                 SettingsManager.shared.saveSettings()
             }
         }
@@ -206,8 +259,6 @@ class OverlayWindowController: NSWindowController {
         }
 
         let overlayView = OverlayView()
-            .frame(width: SettingsManager.shared.windowWidth, height: SettingsManager.shared.windowHeight)
-            .fixedSize()
 
         let hostingView = FixedSizeHostingView(rootView: overlayView)
         hostingView.translatesAutoresizingMaskIntoConstraints = true
@@ -235,14 +286,14 @@ class OverlayWindowController: NSWindowController {
     }
     
     func updateOverlayColor(_ color: Color) {
-        guard let hostingView = window?.contentView as? NSHostingView<OverlayView> else { return }
+        guard let hostingView = window?.contentView as? FixedSizeHostingView<OverlayView> else { return }
         var root = hostingView.rootView
         root.overlayColor = color
         hostingView.rootView = root
     }
     
     func updateOverlayTransparency(_ transparency: Double) {
-        guard let hostingView = window?.contentView as? NSHostingView<OverlayView> else { return }
+        guard let hostingView = window?.contentView as? FixedSizeHostingView<OverlayView> else { return }
         var root = hostingView.rootView
         root.transparency = transparency
         hostingView.rootView = root
@@ -260,8 +311,10 @@ class OverlayWindowController: NSWindowController {
         window.setContentSize(NSSize(width: SettingsManager.shared.windowWidth, height: SettingsManager.shared.windowHeight))
         
         // 更新hosting view的尺寸
-        if let hostingView = window.contentView as? NSHostingView<OverlayView> {
-            hostingView.setFrameSize(NSSize(width: SettingsManager.shared.windowWidth, height: SettingsManager.shared.windowHeight))
+        if let hostingView = window.contentView as? FixedSizeHostingView<OverlayView> {
+            let size = NSSize(width: SettingsManager.shared.windowWidth, height: SettingsManager.shared.windowHeight)
+            hostingView.fixedSize = size
+            hostingView.setFrameSize(size)
         }
     }
 }

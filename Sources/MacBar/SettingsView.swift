@@ -65,8 +65,11 @@ struct SettingsView: View {
                             OverlayWindowController.shared?.updateWindowSize()
                         }
                     }
+                    .onChange(of: settings.windowWidth) { _ in
+                        OverlayWindowController.shared?.updateWindowSize()
+                    }
                 }
-                
+
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
                         Text("高度")
@@ -74,12 +77,14 @@ struct SettingsView: View {
                         Text("\(Int(settings.windowHeight)) px")
                             .foregroundColor(.secondary)
                     }
-                    Slider(value: $settings.windowHeight, in: 50...90, step: 5) { changed in
+                    Slider(value: $settings.windowHeight, in: 70...1200, step: 10) { changed in
                         if !changed {
                             settings.saveSettings()
-                            // 更新窗口尺寸
                             OverlayWindowController.shared?.updateWindowSize()
                         }
+                    }
+                    .onChange(of: settings.windowHeight) { _ in
+                        OverlayWindowController.shared?.updateWindowSize()
                     }
                 }
             }
@@ -90,7 +95,7 @@ struct SettingsView: View {
             Spacer()
         }
         .padding()
-        .frame(minWidth: 280, maxWidth: 320, minHeight: 180)
+        .frame(minWidth: 280, maxWidth: 320, minHeight: 250)
         .onAppear {
             // Make sure settings are loaded
             settings.loadSettings()
