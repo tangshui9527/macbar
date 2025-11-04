@@ -122,9 +122,10 @@ class OverlayWindow: NSWindow, NSWindowDelegate {
             self.performDrag(with: event)
             let newOrigin = frame.origin
             DispatchQueue.main.async {
-                SettingsManager.shared.windowPositionX = Double(newOrigin.x)
-                SettingsManager.shared.windowPositionY = Double(newOrigin.y)
-                SettingsManager.shared.saveSettings()
+                SettingsManager.shared.persistWindowPosition(
+                    x: Double(newOrigin.x),
+                    y: Double(newOrigin.y)
+                )
             }
         }
     }
@@ -180,11 +181,14 @@ class OverlayWindow: NSWindow, NSWindowDelegate {
 
                     // 保存新的窗口位置和尺寸
                     DispatchQueue.main.async {
-                        SettingsManager.shared.windowPositionX = Double(newFrame.origin.x)
-                        SettingsManager.shared.windowPositionY = Double(newFrame.origin.y)
-                        SettingsManager.shared.windowWidth = Double(newFrame.size.width)
-                        SettingsManager.shared.windowHeight = Double(newFrame.size.height)
-                        SettingsManager.shared.saveSettings()
+                        SettingsManager.shared.persistWindowPosition(
+                            x: Double(newFrame.origin.x),
+                            y: Double(newFrame.origin.y)
+                        )
+                        SettingsManager.shared.persistWindowSize(
+                            width: Double(newFrame.size.width),
+                            height: Double(newFrame.size.height)
+                        )
                     }
                 default:
                     break
@@ -205,9 +209,10 @@ class OverlayWindow: NSWindow, NSWindowDelegate {
         let origin = frame.origin
         if savingEnabled {
             DispatchQueue.main.async {
-                SettingsManager.shared.windowPositionX = Double(origin.x)
-                SettingsManager.shared.windowPositionY = Double(origin.y)
-                SettingsManager.shared.saveSettings()
+                SettingsManager.shared.persistWindowPosition(
+                    x: Double(origin.x),
+                    y: Double(origin.y)
+                )
             }
         }
         print("[MacBar] Overlay window did move: origin=\(origin)")
@@ -224,9 +229,7 @@ class OverlayWindow: NSWindow, NSWindowDelegate {
             let height = Double(size.height)
             DispatchQueue.main.async {
                 // 无标题栏下，frame即内容尺寸
-                SettingsManager.shared.windowWidth = width
-                SettingsManager.shared.windowHeight = height
-                SettingsManager.shared.saveSettings()
+                SettingsManager.shared.persistWindowSize(width: width, height: height)
             }
         }
         print("[MacBar] Overlay window did resize: frame=\(self.frame), content=\(self.contentLayoutRect)")
@@ -237,6 +240,9 @@ class OverlayWindowController: NSWindowController {
     static var shared: OverlayWindowController?
     
     convenience init() {
+        // 确保读取到用户上一次保存的遮罩尺寸与位置
+        SettingsManager.shared.loadSettings()
+
         // 如果尚未应用“默认全屏宽度”，则先更新一次宽度（高度保持不变，固定为上一次保存的高度）
         let sizeDefaultAppliedKey = "SizeDefaultApplied"
         let applied = UserDefaults.standard.bool(forKey: sizeDefaultAppliedKey)

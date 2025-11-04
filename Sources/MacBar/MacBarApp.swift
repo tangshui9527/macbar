@@ -57,6 +57,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApplication.shared.setActivationPolicy(.regular)
         print("[MacBar] Application did finish launching, activation policy set to .regular")
 
+        // 预先加载用户上一次保存的窗口尺寸与位置
+        SettingsManager.shared.loadSettings()
+
         // 创建并显示遮罩窗口
         DispatchQueue.main.async {
             self.showOverlayWindow()

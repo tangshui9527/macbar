@@ -77,6 +77,27 @@ final class SettingsManager: ObservableObject {
             windowHeight = max(h, 70) // 保证最小高度
         }
     }
+    
+    /// Persist the latest window dimensions so the overlay can restore them on launch.
+    func persistWindowSize(width: Double, height: Double) {
+        let clampedWidth = max(width, 200)
+        let clampedHeight = max(height, 70)
+        
+        if windowWidth != clampedWidth || windowHeight != clampedHeight {
+            windowWidth = clampedWidth
+            windowHeight = clampedHeight
+        }
+        saveSettings()
+    }
+    
+    /// Persist the latest window origin to keep the overlay anchored where the user left it.
+    func persistWindowPosition(x: Double, y: Double) {
+        if windowPositionX != x || windowPositionY != y {
+            windowPositionX = x
+            windowPositionY = y
+        }
+        saveSettings()
+    }
 }
 
 // Extension to convert Color to RGB
